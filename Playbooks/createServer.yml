@@ -1,0 +1,48 @@
+---
+- name: Deploy hosts at CLC
+  hosts: localhost
+  gather_facts: False
+  connection: local
+  tasks:
+    - name: Deploy 1 new Ubuntu Server without additional disks
+      clc_server:
+        name: "{{ env_hostname }}"
+        template: "{{ env_template }}"
+        count: "{{ env_srvrcnt }}"
+        group: "{{ env_srvrgrp }}"
+        location: "{{ env_datacenter }}"
+      register: clc
+      when: (env_ads | int) == 0
+
+    - name: debug
+      debug: var=clc.servers.0.ipaddress
+      when: (env_ads | int) == 0
+
+    - local_action: copy content={{ clc }} dest=/tmp/serverinfo
+      when: (env_ads | int) == 0
+
+    - name: Deploy 1 new Ubuntu Server with 2 additional {{env_ads | int}}GB disk
+      clc_server:
+        name: "{{ env_hostname }}"
+        template: "{{ env_template }}"
+        count: "{{ env_srvrcnt }}"
+        group: "{{ env_srvrgrp }}"
+        location: "{{ env_datacenter }}"
+        additional_disks:
+        - {sizeGB: "{{env_ads | int}}", type: raw}
+        - {sizeGB: "{{env_ads | int}}", type: raw}
+      register: clc
+      when: (env_ads | int) >= 1
+
+    - name: debug
+      debug: var=clc.servers.0.ipaddress
+      when: (env_ads | int) >= 1
+
+    - local_action: copy content={{ clc }} dest=/tmp/serverinfo
+      when: (env_ads | int) >= 1
+
+#    - name: Wait for SSH to Come up on Server
+#      wait_for: host={{ item.details.ipAddresses[0].internal }} port=22 delay=5 timeout=90 state=started
+#      when: (env_ads | int) >= 1
+#      with_flattened:
+#        - clc.servers

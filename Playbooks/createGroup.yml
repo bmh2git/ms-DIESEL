@@ -1,0 +1,12 @@
+---
+- name: Create Server Group
+  hosts: localhost
+  gather_facts: False
+  connection: local
+  tasks:
+    - name: Create / Verify Server Group
+      clc_group:
+        name: "{{ env_srvrgrp }}"
+        location: "{{ env_datacenter }}"
+        state: present
+      register: clc

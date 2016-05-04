@@ -1,0 +1,12 @@
+---
+- name: Delete a sub group in a specific CLC datacenter
+  hosts: localhost
+  gather_facts: False
+  connection: local
+  tasks:
+    - name: Delete / Verify Absent the Primary CLC Region's Gitlab Server Group
+      clc_group:
+        location: '{{ env_datacenter }}'
+        name: '{{ env_srvrgrp }}'
+        state: absent
+      register: clc
