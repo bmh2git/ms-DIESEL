@@ -1,7 +1,7 @@
 # ./Playbooks/buildApp.yml.yml
 
 #- hosts: "{{ env_srvrgrp }}"
--  tasks:
+- tasks:
   - name: Copy build script to proper location
     copy: src=copyfiles/buildOpenSSL.sh dest=/tmp/
           owner=root group=root mode=0500
