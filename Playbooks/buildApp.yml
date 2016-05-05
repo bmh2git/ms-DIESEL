@@ -10,4 +10,5 @@
           owner=root group=root mode=0500
   - name: Run the build script
     command: /tmp/buildOpenSSL.sh
+    args:
       chdir: /tmp/
