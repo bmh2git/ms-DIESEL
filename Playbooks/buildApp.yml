@@ -5,6 +5,9 @@
   - name: Copy build script to proper location
     copy: src=copyfiles/buildOpenSSL.sh dest=/tmp/
           owner=root group=root mode=0500
+  - name: Copy SPEC file to tmp location
+    copy: src=copyfiles/openssl.spec dest=/tmp/
+          owner=root group=root mode=0500
   - name: Run the build script
     command: /tmp/buildOpenSSL.sh
     chdir: /tmp/
