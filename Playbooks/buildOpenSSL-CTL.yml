@@ -1,6 +1,6 @@
 # ./Playbooks/buildOpenSSL-CTL.yml
 
-- hosts: ossl
+- hosts: localhost
   tasks:
   - name: Copy build script to proper location
     copy: src=copyfiles/buildOpenSSL.sh dest=/tmp/
