@@ -1,6 +1,7 @@
 # ./Playbooks/buildOpenSSL-CTL.yml
 
 - hosts: ossl 
+  gather_facts: true
   tasks:
   - name: Copy SPEC file to tmp location
     copy: src=copyfiles/openssl.spec dest=/tmp/
