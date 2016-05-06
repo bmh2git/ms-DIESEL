@@ -3,7 +3,7 @@
 - hosts: all 
   tasks:
   - name: Copy SPEC file to tmp location
-    copy: src=copyfiles/openssl.spec dest=/tmp/
+    copy: src=Playbooks/copyfiles/openssl.spec dest=/tmp/
           owner=root group=root mode=0500
   - name: run the build open ssl script
     script: copyFiles/buildOpenSSL.sh /tmp
