@@ -1,14 +1,9 @@
 # ./Playbooks/buildOpenSSL-CTL.yml
 
-- hosts: localhost
+- hosts: ossl 
   tasks:
-  - name: Copy build script to proper location
-    copy: src=copyfiles/buildOpenSSL.sh dest=/tmp/
-          owner=root group=root mode=0500
   - name: Copy SPEC file to tmp location
     copy: src=copyfiles/openssl.spec dest=/tmp/
           owner=root group=root mode=0500
-  - name: Run the build script
-    command: /tmp/buildOpenSSL.sh
-    args:
-      chdir: /tmp/
+  - name: run the build open ssl script
+    script: copyFiles/buildOpenSSL.sh /tmp
