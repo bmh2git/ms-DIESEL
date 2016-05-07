@@ -1,0 +1,2 @@
+[ossl]
+ca3wftcbntst01 ansible_ssh_host=10.102.8.27 ansible_ssh_user=root ansible_ssh_pass='abc123!@#'
