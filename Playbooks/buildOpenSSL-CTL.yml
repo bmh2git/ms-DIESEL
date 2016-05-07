@@ -7,4 +7,7 @@
     copy: src=copyfiles/openssl.spec dest=/tmp/
           owner=root group=root mode=0500
   - name: run the build open ssl script
-    script: copyFiles/buildOpenSSL.sh /tmp
+    shell: uname -a
+    register: abc
+  - name: show output
+    debug: var=abc
